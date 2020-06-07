@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  nodejs:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+    command: /app/node_modules/.bin/nodemon /app/build/server.js
+
+  mailslurper:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

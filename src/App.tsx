@@ -8,6 +8,7 @@ import doctorsData from './assets/doctors.json';
 import { PageButtons, themeSwitchIcon, ThemeSwitcher } from './components/controls';
 import { AppContainer, ContentContainer, HeaderContainer, NavContainer, PageContainer } from './components/structure';
 import { Header, PageDetails, SwitchText } from './components/text';
+import { renderDoctorCardsRow } from './helpers/renderers';
 import { sortArrayByLatLongNearest } from './helpers/sorters';
 
 const App = () => {

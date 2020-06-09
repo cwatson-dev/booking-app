@@ -3,3 +3,7 @@ export const getRandomHexDigits = (): string => {
     .toString(16)
     .padStart(6, '0');
 };
+
+export const getRandomHSLColor = (): string => {
+  return `hsla(${~~(360 * Math.random())},70%,70%,0.8)`;
+};

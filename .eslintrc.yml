@@ -15,6 +15,7 @@ parserOptions:
   sourceType: module
 plugins:
   - react
+  - react-hooks
   - '@typescript-eslint'
 rules:
   semi:
@@ -26,7 +27,12 @@ rules:
   max-len:
     - error
     - code: 120
+      ignoreComments: true
   indent:
     - error
     - 2
     - SwitchCase: 1
+  no-unused-vars:
+    - off
+  "@typescript-eslint/no-unused-vars": 
+    - error

@@ -13,9 +13,10 @@ import { renderDoctorCardsRow, renderDoctorDetails } from './helpers/renderers';
 import { sortArrayByLatLongNearest } from './helpers/sorters';
 
 const App = () => {
+  const [appointmentDateTime, setAppointmentDateTime] = useState<Date>(new Date());
   const [currentLocation, setCurrentLocation] = useState<[number, number]>([55.860916, -4.251433]); // default to center of Glasgow
-  const [doctors, setDoctors] = useState<Doctor[]>(doctorsData);
   const [currentLocationEnabled, setCurrentLocationEnabled] = useState(false);
+  const [doctors, setDoctors] = useState<Doctor[]>(doctorsData);
   const [page, setPage] = useState(0);
   const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(doctorsData[0]);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
@@ -89,7 +90,7 @@ const App = () => {
                   </ButtonsContainer>
                 </HeaderContainer>
                 <PageContainer>
-                  {renderDoctorDetails(selectedDoctor)}
+                  {renderDoctorDetails(selectedDoctor, appointmentDateTime, setAppointmentDateTime, bookAppointment)}
                 </PageContainer>
               </>
             )}

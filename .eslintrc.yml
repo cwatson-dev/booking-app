@@ -1,0 +1,38 @@
+env:
+  browser: true
+  es6: true
+extends:
+  - 'plugin:react/recommended'
+  - google
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+plugins:
+  - react
+  - react-hooks
+  - '@typescript-eslint'
+rules:
+  semi:
+    - error
+    - always
+  object-curly-spacing:
+    - error
+    - always
+  max-len:
+    - error
+    - code: 120
+      ignoreComments: true
+  indent:
+    - error
+    - 2
+    - SwitchCase: 1
+  no-unused-vars:
+    - off
+  "@typescript-eslint/no-unused-vars": 
+    - error

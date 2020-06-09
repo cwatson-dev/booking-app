@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
 import Switch from 'react-switch';
 import { ThemeProvider } from 'styled-components';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
@@ -41,24 +40,6 @@ const App = () => {
     else if (latitude && longitude) setCurrentLocation([latitude, longitude]);
     return;
   }, [latitude, longitude, locationError]);
-
-  const bookAppointment = async (doctor: Doctor, date: Date) => {
-    const data = {
-      name: '',
-      email: '',
-      subject: `Booking confirmed with ${doctor.name} on ${dayjs(date).format('DD-MM-YYYY HH:mm')}`,
-      text: '',
-      textHtml: '',
-    };
-    console.log({ data });
-    // const response = await fetch('http://localhost:8081/confirm-booking', {
-    //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //   referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    //   body: JSON.stringify(data), // body data type must match "Content-Type" header
-    // });
-    // return response.json();
-    console.log('booked!');
-  };
 
   return (
     <div>

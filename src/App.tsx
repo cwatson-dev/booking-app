@@ -110,7 +110,13 @@ const App = () => {
                   </ButtonsContainer>
                 </HeaderContainer>
                 <PageContainer>
-                  {renderDoctorDetails(selectedDoctor, appointmentDateTime, setAppointmentDateTime, bookAppointment)}
+                  {renderDoctorDetails(
+                    selectedDoctor,
+                    appointmentDateTime,
+                    setAppointmentDateTime,
+                    userDetails,
+                    setUserDetails,
+                  )}
                 </PageContainer>
               </>
             )}

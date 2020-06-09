@@ -36,5 +36,6 @@ export const DoctorDetail = styled.p<DoctorDetailProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto Mono';
   ${(props) => props.width ? `width: ${props.width}` :''}
 `;

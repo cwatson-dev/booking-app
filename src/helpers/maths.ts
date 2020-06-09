@@ -1,5 +1,5 @@
 // https://stackoverflow.com/questions/18883601/function-to-calculate-distance-between-two-coordinates
-// essentially JS version of the Haversine formula
+// essentially JS version of the Haversine formula, for distance (as the crow flies) between two lat long
 export const getDistanceFromLatLongInKm = (lat1: number, long1: number, lat2: number, long2: number) => {
   const R = 6371; // Radius of the earth in km, see "Volumetric mean radius (km)" from https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
   const dLat = deg2rad(lat2-lat1); // deg2rad below

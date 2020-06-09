@@ -31,12 +31,17 @@ export const bookAppointment = async (doctor: Doctor, date: Date, user: { email:
       </p>
     `,
   };
-  console.log({ data });
-  // const response = await fetch('http://localhost:8081/confirm-booking', {
-  //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
-  //   referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-  //   body: JSON.stringify(data), // body data type must match "Content-Type" header
-  // });
-  // return response.json();
-  console.log('booked!');
+  const response = await fetch('http://localhost:8081/confirm-booking', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    headers: {
+      'Content-Type': 'application/json',
+      'Origin': 'http://localhost',
+    },
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  console.info('booking confirmed!');
+  return response.json();
 };

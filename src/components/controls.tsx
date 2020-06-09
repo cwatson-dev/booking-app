@@ -61,6 +61,13 @@ export const ThemeSwitcher = styled.div`
   align-items: center;
 `;
 
+export const AppointmentDateTime = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const themeSwitchIcon = (faIcon: IconDefinition) => {
   return (
     <IconContainer>

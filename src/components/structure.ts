@@ -51,3 +51,11 @@ export const DoctorProfileContainer = styled.div<DoctorProfileContainerProps>`
   flex-direction: row;
   ${(props) => props.width ? `width: ${props.width}` :''}
 `;
+
+export const AppointmentContainer = styled.div`
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  margin-left: 20%;
+  margin-right: 20%;
+`;

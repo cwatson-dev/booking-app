@@ -10,6 +10,13 @@ app.use(express.static('src'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.post('/confirm-booking', function(req, res) {
   const { name, email, subject, text, textHtml } = req.body;
   const transporter = nodeMailer.createTransport({
@@ -32,8 +39,8 @@ app.post('/confirm-booking', function(req, res) {
     }
     console.info('Message %s sent: %s', info.messageId, info.response);
   });
-  res.writeHead(301, { Location: 'index.html' });
-  res.end();
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify({ status: 'success' }));
 });
 
 app.listen(port, () => {

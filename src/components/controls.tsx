@@ -62,7 +62,7 @@ export const ThemeSwitcher = styled.div`
 `;
 
 export const AppointmentDateTime = styled.div`
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;

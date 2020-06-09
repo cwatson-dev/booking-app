@@ -39,3 +39,26 @@ export const DoctorDetail = styled.p<DoctorDetailProps>`
   font-family: 'Roboto Mono';
   ${(props) => props.width ? `width: ${props.width}` :''}
 `;
+
+export const AppointmentInput = styled.input`
+  font-family: 'Roboto Mono';
+  font-size: medium;
+  flex: 1;
+  height: 40px;
+  width: 300px;
+  display: flex;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid lightgrey;
+  border-left: 0;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+  margin-left: 5px;
+  margin-right: 5px;
+  outline: 0;
+  &:focus: {
+    border-right: 0;
+    border-bottom: 1px solid lightgrey;
+    border-left: 0;
+  }
+`;

@@ -55,7 +55,13 @@ export const DoctorProfileContainer = styled.div<DoctorProfileContainerProps>`
 export const AppointmentContainer = styled.div`
   flex: 2;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-left: 20%;
   margin-right: 20%;
+`;
+
+export const AppointmentRowContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
 `;

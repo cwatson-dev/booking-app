@@ -35,6 +35,7 @@ export const ButtonsContainer = styled.div`
   margin: 0.5em;
 `;
 
+// button design is of an outline form, would be good to offer filled version by way of prop
 export const Button = styled.div<ButtonProps>`
   color: ${(props) => props.btnDisabled ? props.theme.disabled : props.color || props.theme.primary};
   background-color: ${(props) => props.theme.background};

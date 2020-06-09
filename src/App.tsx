@@ -5,11 +5,11 @@ import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
 import theme from './theme';
 import doctorsData from './assets/doctors.json';
-import { PageButtons, themeSwitchIcon, ThemeSwitcher } from './components/controls';
+import { Button, ButtonsContainer, PageButtons, themeSwitchIcon, ThemeSwitcher } from './components/controls';
 import { AppContainer, ContentContainer, HeaderContainer, NavContainer, PageContainer } from './components/structure';
 import { Header, PageDetails, SwitchText } from './components/text';
 import { usePosition } from './helpers/hooks';
-import { renderDoctorCardsRow } from './helpers/renderers';
+import { renderDoctorCardsRow, renderDoctorDetails } from './helpers/renderers';
 import { sortArrayByLatLongNearest } from './helpers/sorters';
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
   const [doctors, setDoctors] = useState<Doctor[]>(doctorsData);
   const [currentLocationEnabled, setCurrentLocationEnabled] = useState(false);
   const [page, setPage] = useState(0);
-  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
+  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(doctorsData[0]);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
 
   const {
@@ -57,22 +57,42 @@ const App = () => {
                 />
               </ThemeSwitcher>
             </NavContainer>
-            <HeaderContainer>
-              <Header>Nearest Doctors</Header>
-              <PageDetails>({page * 9 + 1} to {(page + 1) * 9} of {doctors.length})</PageDetails>
-              <PageButtons
-                setPage={setPage}
-                currentPage={page}
-                maxPage={Math.ceil(doctors.length / 9)}
-                locationEnabled={currentLocationEnabled}
-                setLocationEnabled={setCurrentLocationEnabled}
-              />
-            </HeaderContainer>
-            <PageContainer>
-              {doctors && doctors.length > 0 &&
-                // need to clean up this slice method of getting a sample of 9 docs
-                (renderDoctorCardsRow(doctors.slice(page * 9, page * 9 + 9), setSelectedDoctor))}
-            </PageContainer>
+            {!selectedDoctor && (
+              <>
+                <HeaderContainer>
+                  <Header>Nearest Doctors</Header>
+                  <PageDetails>({page * 9 + 1} to {(page + 1) * 9} of {doctors.length})</PageDetails>
+                  <PageButtons
+                    setPage={setPage}
+                    currentPage={page}
+                    maxPage={Math.ceil(doctors.length / 9)}
+                    locationEnabled={currentLocationEnabled}
+                    setLocationEnabled={setCurrentLocationEnabled}
+                  />
+                </HeaderContainer>
+                <PageContainer>
+                  {doctors && doctors.length > 0 &&
+                    // need to clean up this slice method of getting a sample of 9 docs
+                    (renderDoctorCardsRow(doctors.slice(page * 9, page * 9 + 9), setSelectedDoctor))}
+                </PageContainer>
+              </>
+            )}
+            {selectedDoctor && (
+              <>
+                <HeaderContainer>
+                  <Header flex={2}>{selectedDoctor.name} ({selectedDoctor.company})</Header>
+                  <ButtonsContainer>
+                    <Button
+                      color={'#c22323'}
+                      onClick={() => setSelectedDoctor(null)}
+                    >Cancel</Button>
+                  </ButtonsContainer>
+                </HeaderContainer>
+                <PageContainer>
+                  {renderDoctorDetails(selectedDoctor)}
+                </PageContainer>
+              </>
+            )}
           </ContentContainer>
         </AppContainer>
       </ThemeProvider>

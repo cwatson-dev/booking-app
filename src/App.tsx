@@ -8,6 +8,7 @@ import doctorsData from './assets/doctors.json';
 import { PageButtons, themeSwitchIcon, ThemeSwitcher } from './components/controls';
 import { AppContainer, ContentContainer, HeaderContainer, NavContainer, PageContainer } from './components/structure';
 import { Header, PageDetails, SwitchText } from './components/text';
+import { usePosition } from './helpers/hooks';
 import { renderDoctorCardsRow } from './helpers/renderers';
 import { sortArrayByLatLongNearest } from './helpers/sorters';
 
@@ -18,12 +19,24 @@ const App = () => {
   const [page, setPage] = useState(0);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
 
+  const {
+    latitude,
+    longitude,
+    error: locationError,
+  } = usePosition(currentLocationEnabled);
+
   useEffect(() => {
     // on current location change, use effect sorts the array of docs, this also (re)calculates distance prop on each
     const sortedDoctors = sortArrayByLatLongNearest(doctors, currentLocation);
     setDoctors(sortedDoctors);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLocation]);
+
+  useEffect(() => {
+    if (locationError) console.error(locationError);
+    else if (latitude && longitude) setCurrentLocation([latitude, longitude]);
+    return;
+  }, [latitude, longitude, locationError]);
 
   return (
     <div>

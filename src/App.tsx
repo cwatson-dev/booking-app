@@ -54,6 +54,9 @@ const App = () => {
               />
             </HeaderContainer>
             <PageContainer>
+              {doctors && doctors.length > 0 &&
+                // need to clean up this slice method of getting a sample of 9 docs
+                (renderDoctorCardsRow(doctors.slice(page * 9, page * 9 + 9), setSelectedDoctor))}
             </PageContainer>
           </ContentContainer>
         </AppContainer>

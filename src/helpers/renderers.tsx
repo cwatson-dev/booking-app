@@ -10,7 +10,7 @@ import { AppointmentContainer, AppointmentRowContainer, DoctorProfileContainer }
 import { DoctorAbout, DoctorDetail, AppointmentInput } from '../components/text';
 import { bookAppointment } from './network';
 
-// both renderers could be improved
+// both renderers below could be improved
 // passing `setSelectedDoctor` directly through both funcs below, to the underlying <DoctorCard> feels wrong
 
 const renderDoctorCards = (
@@ -43,6 +43,7 @@ export const renderDoctorCardsRow = (
 };
 
 // this renderer should be changed to use components with proper spacing css, not `&nbsp;`
+// future work: this renderer could be simplified and components could be extracted & modularized
 export const renderAppointmentPage = (
   selectedDoctor: Doctor,
   appointmentDateTime: Date,

@@ -14,10 +14,11 @@ export const bookAppointment = async (doctor: Doctor, date: Date, user: { email:
     name,
     email,
     subject: `Appointment confirmed with ${doctor.name} on ${dayjs(date).format('DD-MM-YYYY')}`,
-    // eslint-disable-next-line max-len
+    // future work: extract text/body generation to helper func
     text: `Hi ${name}, this is a just a short message to confirm your appointment with ${doctor.name} at
       ${doctor.company} (${doctor.address}) on ${dayjs(date).format('ddd, MMM D, YYYY')}
       at ${dayjs(date).format('h:mm A')}`,
+    // future work: extract html generation to helper func
     textHtml: `
       <h3>Appointment Confirmation</h3>
       <p>

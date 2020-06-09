@@ -13,9 +13,23 @@ export const bookAppointment = async (doctor: Doctor, date: Date, user: { email:
   const data = {
     name,
     email,
-    subject: `Booking confirmed with ${doctor.name} on ${dayjs(date).format('DD-MM-YYYY HH:mm')}`,
-    text: '',
-    textHtml: '',
+    subject: `Appointment confirmed with ${doctor.name} on ${dayjs(date).format('DD-MM-YYYY')}`,
+    // eslint-disable-next-line max-len
+    text: `Hi ${name}, this is a just a short message to confirm your appointment with ${doctor.name} at
+      ${doctor.company} (${doctor.address}) on ${dayjs(date).format('ddd, MMM D, YYYY')}
+      at ${dayjs(date).format('h:mm A')}`,
+    textHtml: `
+      <h3>Appointment Confirmation</h3>
+      <p>
+        Hi ${name}, this is a just a short message to confirm your appointment with
+        ${' '}${doctor.name} at ${doctor.company} (${doctor.address}) on${' '}
+        ${dayjs(date).format('ddd, MMM D, YYYY')} at ${dayjs(date).format('h:mm A')}.
+      </p>
+      <p>
+        If you need to contact us, please email your doctor at <a href='mailto:${doctor.email}'>${doctor.email}</a>
+        ${' '}or call us on <a href='tel:${doctor.phone}'>${doctor.phone}</a>.
+      </p>
+    `,
   };
   console.log({ data });
   // const response = await fetch('http://localhost:8081/confirm-booking', {

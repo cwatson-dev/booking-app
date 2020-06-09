@@ -8,10 +8,22 @@ import doctorsData from './assets/doctors.json';
 import { PageButtons, themeSwitchIcon, ThemeSwitcher } from './components/controls';
 import { AppContainer, ContentContainer, HeaderContainer, NavContainer, PageContainer } from './components/structure';
 import { Header, PageDetails, SwitchText } from './components/text';
+import { sortArrayByLatLongNearest } from './helpers/sorters';
+
 const App = () => {
+  const [currentLocation, setCurrentLocation] = useState<[number, number]>([55.860916, -4.251433]); // default to center of Glasgow
   const [doctors, setDoctors] = useState<Doctor[]>(doctorsData);
+  const [currentLocationEnabled, setCurrentLocationEnabled] = useState(false);
   const [page, setPage] = useState(0);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    // on current location change, use effect sorts the array of docs, this also (re)calculates distance prop on each
+    const sortedDoctors = sortArrayByLatLongNearest(doctors, currentLocation);
+    setDoctors(sortedDoctors);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentLocation]);
+
   return (
     <div>
       <ThemeProvider theme={themeMode === 'light' ? theme.light : theme.dark}>

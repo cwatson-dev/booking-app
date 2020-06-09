@@ -6,8 +6,9 @@ import { faMapMarkedAlt, faStar, faUserMd } from '@fortawesome/free-solid-svg-ic
 
 import { CardRow, DistanceSpan, DoctorCard, RatingSpan, ProfileIconContainer } from '../components/cards';
 import { AppointmentDateTime, Button, ButtonsContainer } from '../components/controls';
-import { DoctorProfileContainer, AppointmentContainer } from '../components/structure';
-import { DoctorAbout, DoctorDetail } from '../components/text';
+import { AppointmentContainer, AppointmentRowContainer, DoctorProfileContainer } from '../components/structure';
+import { DoctorAbout, DoctorDetail, AppointmentInput } from '../components/text';
+import { bookAppointment } from './network';
 
 // both renderers could be improved
 // passing `setSelectedDoctor` directly through both funcs below, to the underlying <DoctorCard> feels wrong
@@ -46,7 +47,8 @@ export const renderDoctorDetails = (
   selectedDoctor: Doctor,
   appointmentDateTime: Date,
   setAppointmentDateTime: Dispatch<SetStateAction<Date>>,
-  bookAppointment: any,
+  userDetails: { email: string, name: string},
+  setUserDetails: Dispatch<SetStateAction<{ email: string, name: string}>>,
 ) => {
   return (
     <>
@@ -71,21 +73,41 @@ export const renderDoctorDetails = (
         </DoctorAbout>
       </DoctorProfileContainer>
       <AppointmentContainer>
-        <AppointmentDateTime>
-          <p>Appointment Slot:&nbsp;</p>
-          <div>
-            <DateTimePicker
-              onChange={setAppointmentDateTime}
-              value={appointmentDateTime}
-            />
-          </div>
-        </AppointmentDateTime>
-        <ButtonsContainer>
-          <Button
-            color={'#32bf57'}
-            onClick={() => bookAppointment(selectedDoctor, appointmentDateTime)}
-          >Book</Button>
-        </ButtonsContainer>
+        <AppointmentRowContainer>
+          <AppointmentInput
+            type="text"
+            placeholder={'Enter your name'}
+            value={userDetails.name}
+            onChange={(event) => {
+              setUserDetails({ ...userDetails, name: event.target.value });
+            }}
+          />
+          <AppointmentInput
+            type="text"
+            placeholder={'Enter your email'}
+            value={userDetails.email}
+            onChange={(event) => {
+              setUserDetails({ ...userDetails, email: event.target.value });
+            }}
+          />
+        </AppointmentRowContainer>
+        <AppointmentRowContainer>
+          <AppointmentDateTime>
+            <p>Appointment Slot:&nbsp;</p>
+            <div>
+              <DateTimePicker
+                onChange={setAppointmentDateTime}
+                value={appointmentDateTime}
+              />
+            </div>
+          </AppointmentDateTime>
+          <ButtonsContainer>
+            <Button
+              color={'#32bf57'}
+              onClick={() => bookAppointment(selectedDoctor, appointmentDateTime, userDetails)}
+            >Book</Button>
+          </ButtonsContainer>
+        </AppointmentRowContainer>
       </AppointmentContainer>
       <DoctorDetail>{selectedDoctor.address}</DoctorDetail>
       <DoctorDetail>Email:&nbsp;<a href={`mailto:${selectedDoctor.email}`}>{selectedDoctor.email}</a></DoctorDetail>

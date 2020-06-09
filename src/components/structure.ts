@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface DoctorProfileContainerProps {
+  width?: string
+}
+
 export const AppContainer = styled.div`
   background-color: ${(props) => props.theme.background === '#fff' ? '#666' : '#222'};
   width: 60%;
@@ -39,4 +43,11 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   padding-left: 10%;
   padding-right: 10%;
+`;
+
+export const DoctorProfileContainer = styled.div<DoctorProfileContainerProps>`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  ${(props) => props.width ? `width: ${props.width}` :''}
 `;

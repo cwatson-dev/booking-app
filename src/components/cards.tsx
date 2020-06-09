@@ -18,11 +18,11 @@ const HighlightSpan = styled.span`
   padding: 3px;
 `;
 
-const RatingSpan = styled(HighlightSpan)`
+export const RatingSpan = styled(HighlightSpan)`
   background-color: ${(props) => props.theme.primary};
 `;
 
-const DistanceSpan = styled(HighlightSpan)`
+export const DistanceSpan = styled(HighlightSpan)`
   background-color: ${(props) => props.theme.secondary};
 `;
 
@@ -44,9 +44,10 @@ const CardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
-const ProfileIconContainer = styled.div`
+export const ProfileIconContainer = styled.div`
   background-color: ${getRandomHSLColor};
   border-radius: 5px;
   margin-top: 5%;

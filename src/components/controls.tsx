@@ -90,7 +90,10 @@ export const PageButtons = (props: PageButtonProps) => {
         btnDisabled={currentPage < 1}
         onClick={currentPage < 1 ? undefined : () => setPage(currentPage - 1)}
       >Previous</Button>
-      <Button color={'#f59042'} onClick={() => setLocationEnabled(!locationEnabled)} >
+      <Button color={'#f59042'} onClick={() => {
+        setLocationEnabled(!locationEnabled);
+        setPage(0);
+      }}>
         <FontAwesomeIcon icon={faLocationArrow} />
       </Button>
     </ButtonsContainer>

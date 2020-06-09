@@ -2,6 +2,14 @@ import dayjs from 'dayjs';
 
 export const bookAppointment = async (doctor: Doctor, date: Date, user: { email: string, name: string } ) => {
   const { email, name } = user;
+  if (!(name.length > 1)) {
+    return console.error('No name provided!');
+  }
+  // eslint-disable-next-line max-len
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (!emailRegex.test(email)) {
+    return console.error('Invalid email provided!');
+  }
   const data = {
     name,
     email,

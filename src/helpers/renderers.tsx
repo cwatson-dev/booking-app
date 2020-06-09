@@ -49,6 +49,7 @@ export const renderDoctorDetails = (
   setAppointmentDateTime: Dispatch<SetStateAction<Date>>,
   userDetails: { email: string, name: string},
   setUserDetails: Dispatch<SetStateAction<{ email: string, name: string}>>,
+  setSelectedDoctor: Dispatch<SetStateAction<Doctor | null>>,
 ) => {
   return (
     <>
@@ -104,7 +105,10 @@ export const renderDoctorDetails = (
           <ButtonsContainer>
             <Button
               color={'#32bf57'}
-              onClick={() => bookAppointment(selectedDoctor, appointmentDateTime, userDetails)}
+              onClick={async () => {
+                const res = await bookAppointment(selectedDoctor, appointmentDateTime, userDetails);
+                if (res.status === 'success') setSelectedDoctor(null);
+              }}
             >Book</Button>
           </ButtonsContainer>
         </AppointmentRowContainer>

@@ -43,7 +43,7 @@ export const renderDoctorCardsRow = (
 };
 
 // this renderer should be changed to use components with proper spacing css, not `&nbsp;`
-export const renderDoctorDetails = (
+export const renderAppointmentPage = (
   selectedDoctor: Doctor,
   appointmentDateTime: Date,
   setAppointmentDateTime: Dispatch<SetStateAction<Date>>,

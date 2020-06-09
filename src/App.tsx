@@ -9,7 +9,7 @@ import { Button, ButtonsContainer, PageButtons, themeSwitchIcon, ThemeSwitcher }
 import { AppContainer, ContentContainer, HeaderContainer, NavContainer, PageContainer } from './components/structure';
 import { Header, PageDetails, SwitchText } from './components/text';
 import { usePosition } from './helpers/hooks';
-import { renderDoctorCardsRow, renderDoctorDetails } from './helpers/renderers';
+import { renderDoctorCardsRow, renderAppointmentPage } from './helpers/renderers';
 import { sortArrayByLatLongNearest } from './helpers/sorters';
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
   const [currentLocationEnabled, setCurrentLocationEnabled] = useState(false);
   const [doctors, setDoctors] = useState<Doctor[]>(doctorsData);
   const [page, setPage] = useState(0);
-  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(doctorsData[0]);
+  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
   const [userDetails, setUserDetails] = useState({ name: '', email: '' });
 
@@ -91,12 +91,13 @@ const App = () => {
                   </ButtonsContainer>
                 </HeaderContainer>
                 <PageContainer>
-                  {renderDoctorDetails(
+                  {renderAppointmentPage(
                     selectedDoctor,
                     appointmentDateTime,
                     setAppointmentDateTime,
                     userDetails,
                     setUserDetails,
+                    setSelectedDoctor,
                   )}
                 </PageContainer>
               </>

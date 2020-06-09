@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkedAlt, faStar, faUserMd } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import { getRandomHSLColor } from '../helpers/generators';
 type DoctorCardProps = {
   docKey: string
   doctor: Doctor
+  setSelectedDoctor: Dispatch<SetStateAction<Doctor | null>>
 }
 
 const HighlightSpan = styled.span`
@@ -63,11 +64,11 @@ const CardText = styled.p`
 `;
 
 export const DoctorCard = (props: DoctorCardProps) => {
-  const { doctor, docKey } = props;
+  const { doctor, docKey, setSelectedDoctor } = props;
   const { name, company, rating, distance = 0 } = doctor;
 
   return (
-    <CardContainer key={docKey}>
+    <CardContainer key={docKey} onClick={() => setSelectedDoctor(doctor)}>
       <ProfileIconContainer>
         <FontAwesomeIcon icon={faUserMd} color={'#fff'} size="5x" />
       </ProfileIconContainer>

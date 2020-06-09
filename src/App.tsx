@@ -17,6 +17,7 @@ const App = () => {
   const [doctors, setDoctors] = useState<Doctor[]>(doctorsData);
   const [currentLocationEnabled, setCurrentLocationEnabled] = useState(false);
   const [page, setPage] = useState(0);
+  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
 
   const {
